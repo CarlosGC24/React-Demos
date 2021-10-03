@@ -1,9 +1,30 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 // by default runs after every re-render
 // cleanup function
 // second parameter
 const UseEffectBasics = () => {
-  return <h2>useEffect Basics</h2>;
+  const [value, setValue] = useState(0);
+
+  useEffect(() => {
+    if (value > 0) {
+      console.log("call useEffect");
+      document.title = `New Messages(${value})`;
+    }
+  }, [value]); // 2nd argument: List of dependencies, as it is it will only run on the initial render
+
+  useEffect(() => {
+    console.log("Use Effect");
+  }, []);
+
+  console.log("render component");
+  return (
+    <>
+      <h1>{value}</h1>
+      <button className="btn" onClick={() => setValue(value + 1)}>
+        Click Me
+      </button>
+    </>
+  );
 };
 
 export default UseEffectBasics;
